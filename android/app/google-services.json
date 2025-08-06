@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "588867274755",
+    "project_id": "rewriter-app-d511c",
+    "storage_bucket": "rewriter-app-d511c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588867274755:android:8c1c81457936b2c782a636",
+        "android_client_info": {
+          "package_name": "com.example.rewriter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxwjMfVYybAU8ffrtUgu_q31qnOku6uh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
