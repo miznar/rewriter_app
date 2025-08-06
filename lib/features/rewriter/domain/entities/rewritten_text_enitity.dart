@@ -1,0 +1,1 @@
+//clean data returned from service
