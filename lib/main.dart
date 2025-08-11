@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'core/themes/app_theme.dart';
 import 'features/homescreen/home_screen.dart';
+import 'features/login_screen/login_screen.dart';
+import 'features/onboarding/onboarding_screen.dart';
 import 'firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +46,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.onboarding: (context) => const OnboardingScreen(),
         AppRoutes.home: (context) => const HomeScreen(),
-        AppRoutes.login: (context) => const LoginScreen(), // if needed
+        AppRoutes.login: (context) => const LoginScreen(),
       },
     );
   }
@@ -53,4 +56,4 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String home = '/home';
   static const String login = '/login'; // Add this if you're using login navigation
-
+}
