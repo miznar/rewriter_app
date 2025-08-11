@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.black),
         ),
         extensions: <ThemeExtension<dynamic>>[
-          AppColors.light, // ✅ This is required to use `AppColors` in screens
+          AppColors.light,
         ],
       ),
       initialRoute:
