@@ -20,13 +20,22 @@ class SignInScreen extends StatelessWidget {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
           child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: size.height - MediaQuery.of(context).padding.top),
+            constraints: BoxConstraints(
+              minHeight: size.height - MediaQuery.of(context).padding.top,
+            ),
             child: IntrinsicHeight(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: verticalSpacing),
-                  const Icon(Icons.arrow_back),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.home,
+                      (route) => false,
+                    ),
+                    child: const Icon(Icons.arrow_back),
+                  ),
                   SizedBox(height: size.height * 0.04),
                   const Text(
                     "Let’s Sign you in.",
@@ -73,7 +82,9 @@ class SignInScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const RewriteScreen()),
+                              MaterialPageRoute(
+                                builder: (_) => const RewriteScreen(),
+                              ),
                             );
                           },
                         ),
@@ -90,7 +101,7 @@ class SignInScreen extends StatelessWidget {
                                 "Register",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ],

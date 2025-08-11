@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import '../../core/themes/app_theme.dart';
-import '../login_screen/login_screen.dart';
+import '../../app/routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void _navigateToLogin(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
-    );
+  void _navigateToSignIn(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.signIn);
+  }
+
+  void _navigateToSignUp(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.signUp);
   }
 
   @override
@@ -28,15 +29,15 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colors.background,
                 border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.shade300,
-                    width: 1,
-                  ),
+                  bottom: BorderSide(color: Colors.grey.shade300, width: 1),
                 ),
               ),
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 10.0,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -59,10 +60,13 @@ class HomeScreen extends StatelessWidget {
                       // Sign In Button
                       GestureDetector(
                         onTap: () {
-                          _navigateToLogin(context);
+                          _navigateToSignIn(context);
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: colors.iconColor,
                             borderRadius: BorderRadius.circular(6),
@@ -134,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => _navigateToLogin(context),
+                    onPressed: () => _navigateToSignUp(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colors.accentText,
                       padding: EdgeInsets.symmetric(
@@ -161,21 +165,24 @@ class HomeScreen extends StatelessWidget {
                   context,
                   icon: Icons.auto_fix_high,
                   title: 'Smart Rewriting',
-                  subtitle: 'AI-powered text transformation that preserves meaning while changing tone',
+                  subtitle:
+                      'AI-powered text transformation that preserves meaning while changing tone',
                   isTablet: isTablet,
                 ),
                 _buildFeatureCard(
                   context,
                   icon: Icons.record_voice_over,
                   title: 'Multiple Tones',
-                  subtitle: 'Switch between professional, casual, friendly, or persuasive tones',
+                  subtitle:
+                      'Switch between professional, casual, friendly, or persuasive tones',
                   isTablet: isTablet,
                 ),
                 _buildFeatureCard(
                   context,
                   icon: Icons.history,
                   title: 'History Tracking',
-                  subtitle: 'Easily revisit and reuse your past rewritten texts anytime',
+                  subtitle:
+                      'Easily revisit and reuse your past rewritten texts anytime',
                   isTablet: isTablet,
                 ),
                 _buildFeatureCard(
@@ -194,12 +201,12 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildFeatureCard(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-        required String subtitle,
-        required bool isTablet,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required bool isTablet,
+  }) {
     final colors = Theme.of(context).extension<AppColors>()!;
     final cardHeight = isTablet ? 220.0 : 200.0;
 

@@ -17,7 +17,14 @@ class SignUpScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              const Icon(Icons.arrow_back), // You can hook this to Navigator.pop()
+              GestureDetector(
+                onTap: () => Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutes.home,
+                  (route) => false,
+                ),
+                child: const Icon(Icons.arrow_back),
+              ),
               const SizedBox(height: 40),
               const Text(
                 "Let’s Sign you in.",
@@ -51,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
-                  SocialLoginButton(icon: 'assets/logos/google.png')
+                  SocialLoginButton(icon: 'assets/logos/google.png'),
                 ],
               ),
               const SizedBox(height: 140),
@@ -67,7 +74,7 @@ class SignUpScreen extends StatelessWidget {
                       "Register",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 16),

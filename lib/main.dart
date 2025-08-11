@@ -2,18 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app/app.dart';
+import 'app/routes/app_routes.dart';
 import 'core/themes/app_theme.dart';
 import 'features/homescreen/home_screen.dart';
 import 'features/login_screen/login_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'features/auth/presentation/view/sign_in_screen.dart';
+import 'features/auth/presentation/view/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final prefs = await SharedPreferences.getInstance();
   final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
@@ -39,23 +40,10 @@ class MyApp extends StatelessWidget {
           bodyLarge: TextStyle(color: Colors.black),
           bodyMedium: TextStyle(color: Colors.black),
         ),
-        extensions: <ThemeExtension<dynamic>>[
-          AppColors.light,
-        ],
+        extensions: <ThemeExtension<dynamic>>[AppColors.light],
       ),
-      initialRoute:
-      hasSeenOnboarding ? AppRoutes.home : AppRoutes.onboarding,
-      routes: {
-        AppRoutes.onboarding: (context) => const OnboardingScreen(),
-        AppRoutes.home: (context) => const HomeScreen(),
-        AppRoutes.login: (context) => const LoginScreen(),
-      },
+      initialRoute: hasSeenOnboarding ? AppRoutes.home : AppRoutes.onboarding,
+      routes: AppRoutes.routes,
     );
   }
-}
-
-class AppRoutes {
-  static const String onboarding = '/onboarding';
-  static const String home = '/home';
-  static const String login = '/login';
 }
