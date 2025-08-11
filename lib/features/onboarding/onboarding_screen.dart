@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                     // Dark overlay for better text visibility
                     Container(
-                      color: Colors.black.withOpacity(0.4),
+                      color: Colors.black,
                     ),
 
                     // Title in the middle
@@ -77,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             shadows: [
                               Shadow(
                                 blurRadius: 6,
-                                color: Colors.black.withOpacity(0.7),
+                                color: Colors.black,
                               ),
                             ],
                           ),
@@ -122,7 +122,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       shape: BoxShape.circle,
                       color: _currentIndex == index
                           ? Colors.white
-                          : Colors.white.withOpacity(0.5),
+                          : Colors.white,
                     ),
                   ),
                 ),
