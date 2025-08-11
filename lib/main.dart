@@ -18,7 +18,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final bool hasSeenOnboarding;
-
   const MyApp({super.key, required this.hasSeenOnboarding});
 
   @override
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.onboarding: (context) => const OnboardingScreen(),
         AppRoutes.home: (context) => const HomeScreen(),
-        // AppRoutes.login: (context) => const LoginScreen(), // if needed
+        AppRoutes.login: (context) => const LoginScreen(), // if needed
       },
     );
   }
