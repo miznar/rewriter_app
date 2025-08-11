@@ -55,5 +55,5 @@ class MyApp extends StatelessWidget {
 class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String home = '/home';
-  static const String login = '/login'; // Add this if you're using login navigation
+  static const String login = '/login';
 }
