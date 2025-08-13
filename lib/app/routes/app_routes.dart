@@ -4,7 +4,6 @@ import '../../features/auth/presentation/view/sign_up_screen.dart';
 import '../../features/history/history_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/homescreen/home_screen.dart';
-import '../../features/login_screen/login_screen.dart';
 
 class AppRoutes {
   static const String onboarding = '/onboarding';
@@ -17,7 +16,6 @@ class AppRoutes {
   static final Map<String, WidgetBuilder> routes = {
     onboarding: (context) => const OnboardingScreen(),
     home: (context) => const HomeScreen(),
-    login: (context) => const LoginScreen(),
     signIn: (context) => const SignInScreen(),
     signUp: (context) => const SignUpScreen(),
     history: (context) => const HistoryScreen(),
