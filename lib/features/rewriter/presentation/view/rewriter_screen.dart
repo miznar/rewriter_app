@@ -60,7 +60,19 @@ class _RewriteScreenState extends State<RewriteScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TabSwitcher(),
+                TabSwitcher(
+                  selectedTab: "Workspace",
+                  onWorkspaceTap: () {},
+                  onHistoryTap: () {
+                    Navigator.pushNamed(context, AppRoutes.history);
+                  },
+                ),
+                const SizedBox(height: 16),
+                const SectionTitle(
+                  title: "Transform Your Text",
+                  subtitle:
+                  "Paste your content and watch it transform into the perfect tone for any occasion.",
+                ),
               const SizedBox(height: 16),
               const SectionTitle(
                 title: "Transform Your Text",
