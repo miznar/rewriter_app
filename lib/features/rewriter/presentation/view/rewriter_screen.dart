@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../app/routes/app_routes.dart';
 import '../../../../core/themes/app_theme.dart';
 import '../../../../shared/widgets/app_header.dart';
-import '../widgets/top_nav_bar.dart';
 import '../widgets/tab_switcher.dart';
 import '../widgets/section_title.dart';
 import '../widgets/original_text_card.dart';
