@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/themes/app_theme.dart';
 import '../../app/routes/app_routes.dart';
+import '../../shared/widgets/app_header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,69 +24,9 @@ class HomeScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(64), // Reduced height
-            child: Container(
-              decoration: BoxDecoration(
-                color: colors.background,
-                border: Border(
-                  bottom: BorderSide(color: Colors.grey.shade300, width: 1),
-                ),
-              ),
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 10.0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Logo and Title
-                      Row(
-                        children: [
-                          Icon(Icons.edit, color: colors.accentText, size: 20),
-                          const SizedBox(width: 6),
-                          Text(
-                            'Rewrite',
-                            style: TextStyle(
-                              color: colors.primaryText,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Sign In Button
-                      GestureDetector(
-                        onTap: () {
-                          _navigateToSignIn(context);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colors.iconColor,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: const Text(
-                            'Sign In',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          appBar: AppHeader(
+            title: 'Rewrite',
+            onSignInTap: () => _navigateToSignIn(context),
           ),
           body: SingleChildScrollView(
             padding: EdgeInsets.symmetric(

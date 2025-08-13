@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'app/routes/app_routes.dart';
 import 'core/themes/app_theme.dart';
+import 'features/login_screen/login_screen.dart';
+import 'features/onboarding/onboarding_screen.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +14,11 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
-  runApp(MyApp(hasSeenOnboarding: hasSeenOnboarding));
+  runApp(
+    ProviderScope(
+      child: MyApp(hasSeenOnboarding: hasSeenOnboarding),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
