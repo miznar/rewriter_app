@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app/app.dart';
 import 'app/routes/app_routes.dart';
 import 'core/themes/app_theme.dart';
-import 'features/homescreen/home_screen.dart';
 import 'features/login_screen/login_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'firebase_options.dart';
@@ -19,7 +18,11 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
-  runApp(MyApp(hasSeenOnboarding: hasSeenOnboarding));
+  runApp(
+    ProviderScope(
+      child: MyApp(hasSeenOnboarding: hasSeenOnboarding),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

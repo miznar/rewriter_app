@@ -1,57 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../controller/rewrite_controller.dart';
-import '../widgets/rewrite_input_box.dart';
-import '../widgets/rewrite_style_selector.dart';
-import '../widgets/rewrite_output_box.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../core/themes/app_theme.dart';
+import '../../../../shared/widgets/app_header.dart';
+import '../widgets/top_nav_bar.dart';
+import '../widgets/tab_switcher.dart';
+import '../widgets/section_title.dart';
+import '../widgets/original_text_card.dart';
+import '../widgets/tone_selector.dart';
 import '../widgets/rewrite_action_button.dart';
+import '../widgets/rewritten_text_card.dart';
 
-class RewriteScreen extends ConsumerStatefulWidget {
+class RewriteScreen extends StatefulWidget {
   const RewriteScreen({super.key});
 
   @override
-  ConsumerState<RewriteScreen> createState() => _RewriteScreenState();
+  State<RewriteScreen> createState() => _RewriteScreenState();
 }
 
-class _RewriteScreenState extends ConsumerState<RewriteScreen> {
-  final _controller = TextEditingController();
-  String _selectedStyle = "Formal";
+class _RewriteScreenState extends State<RewriteScreen> {
+  String originalText = '';
+  String rewrittenText = '';
+  String selectedTone = 'Professional';
+
+  void _navigateToSignIn(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.signIn);
+  }
+
+  void _onRewritePressed() {
+    // Here you’d call your rewrite API/service
+    setState(() {
+      rewrittenText = 'This is your rewritten text based on $selectedTone tone.';
+    });
+  }
+
+  void _onToneSelected(String tone) {
+    setState(() {
+      selectedTone = tone;
+    });
+  }
+
+  void _onOriginalTextChanged(String text) {
+    setState(() {
+      originalText = text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final rewriteState = ref.watch(rewriteProvider);
-    final rewriteNotifier = ref.read(rewriteProvider.notifier);
+    final colors = Theme.of(context).extension<AppColors>()!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Rewrite Text")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            RewriteInputBox(controller: _controller),
-            const SizedBox(height: 16),
-            RewriteStyleSelector(
-              selectedStyle: _selectedStyle,
-              styles: const ["Formal", "Casual", "Creative"],
-              onStyleChanged: (style) => setState(() => _selectedStyle = style),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: rewriteState.when(
-                data: (output) => RewriteOutputBox(text: output),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text("Error: $err"),
+      backgroundColor: colors.background,
+      appBar: AppHeader(
+        title: 'Rewrite',
+        onSignInTap: () => _navigateToSignIn(context),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TabSwitcher(),
+              const SizedBox(height: 16),
+              const SectionTitle(
+                title: "Transform Your Text",
+                subtitle:
+                "Paste your content and watch it transform into the perfect tone for any occasion.",
               ),
-            ),
-            const SizedBox(height: 16),
-            RewriteActionButton(
-              onPressed: () => rewriteNotifier.rewriteText(
-                _controller.text,
-                _selectedStyle,
+              const SizedBox(height: 16),
+              // Pass a callback so OriginalTextCard can update state
+              OriginalTextCard(
+                onTextChanged: _onOriginalTextChanged,
               ),
-              isLoading: rewriteState.isLoading,
-            ),
-          ],
+              const SizedBox(height: 24),
+              ToneSelector(
+                selectedTone: selectedTone,
+                onToneSelected: _onToneSelected,
+              ),
+              const SizedBox(height: 16),
+              PrimaryActionButton(
+                text: "Rewrite Text",
+                onPressed: _onRewritePressed,
+              ),
+              const SizedBox(height: 24),
+              RewrittenTextCard(
+                rewrittenText: rewrittenText,
+                selectedTone: selectedTone,
+              ),
+            ],
+          ),
         ),
       ),
     );
